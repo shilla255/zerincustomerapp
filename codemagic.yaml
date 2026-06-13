@@ -1,29 +1,4 @@
-workflows:
-  ios-release:
-    name: iOS Release Build (TestFlight)
-    max_build_duration: 60
-    instance_type: mac_mini_m2
-    integrations:
-      app_store_connect: zerin_express
-    environment:
-      flutter: stable
-      xcode: latest
-      cocoapods: default
-      vars:
-        BUNDLE_ID: "com.zerinexpress.app"
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: main
-          include: true
-    cache:
-      cache_paths:
-        - $FLUTTER_ROOT/.pub-cache
-        - $HOME/.pub-cache
-        - ios/Pods
-
-    scripts:
+scripts:
       - name: Install Flutter dependencies
         script: flutter pub get
 
@@ -31,6 +6,10 @@ workflows:
         script: |
           cd ios
           pod install
+
+      - name: Initialize keychain
+        script: |
+          keychain initialize
 
       - name: Fetch signing files
         script: |
@@ -40,26 +19,9 @@ workflows:
 
       - name: Set up code signing settings on Xcode project
         script: |
-          keychain initialize
           xcode-project use-profiles
 
       - name: Build IPA
         script: |
           flutter build ipa --release \
             --export-options-plist=/Users/builder/export_options.plist
-
-    artifacts:
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-
-    publishing:
-      email:
-        recipients:
-          - dimanshilla255@gmail.com
-        notify:
-          success: true
-          failure: true
-
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
