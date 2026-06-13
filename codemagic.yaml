@@ -1,19 +1,15 @@
 # ============================================================
 # Codemagic CI/CD for Flutter iOS - Zerin Express Customer App
 # ============================================================
-# 
-# How to use:
-# 1. Push this file to your repository (already done)
-# 2. In Codemagic UI:
-#    - Go to App settings → Code signing → Connect your Apple Developer account (Automatic signing - Recommended)
-#    - Go to App settings → Publishing → Apple App Store Connect → Upload your .p8 file and add the key
-# 3. Trigger a build using the "ios-release" workflow
 
 workflows:
   ios-release:
     name: iOS Release Build (TestFlight)
     max_build_duration: 60
     instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: true
 
     environment:
       flutter: stable
@@ -67,12 +63,10 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
-        # submit_to_app_store: false     # Change to true only when ready for App Store review
 
 # ============================================================
 # Notes:
 # - Bundle ID: com.zerinexpress.app
-# - Recommended: Use Automatic code signing by connecting your Apple Developer account in Codemagic
-# - Make sure you have created the App in App Store Connect with the same bundle ID
-# - After successful build, the IPA will be automatically sent to TestFlight
+# - Go to Codemagic UI → App settings → Code signing → Connect Apple Developer account (Recommended)
+# - Go to App settings → Publishing → Apple App Store Connect → Upload your .p8 file
 # ============================================================
