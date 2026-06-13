@@ -8,6 +8,8 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
+      groups:
+        - app-store-connect          # ← This line imports your variables
       vars:
         BUNDLE_ID: "com.zerinexpress.app"
 
