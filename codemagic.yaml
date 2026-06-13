@@ -1,15 +1,8 @@
-# ============================================================
-# Codemagic CI/CD for Flutter iOS - Zerin Express Customer App
-# ============================================================
-
 workflows:
   ios-release:
     name: iOS Release Build (TestFlight)
     max_build_duration: 60
     instance_type: mac_mini_m2
-
-    integrations:
-      app_store_connect: true
 
     environment:
       flutter: stable
@@ -23,8 +16,6 @@ workflows:
         - push
       branch_patterns:
         - pattern: main
-          include: true
-        - pattern: 'release/*'
           include: true
 
     cache:
@@ -42,7 +33,7 @@ workflows:
           cd ios
           pod install
 
-      - name: Build IPA for App Store
+      - name: Build IPA
         script: |
           flutter build ipa --release \
             --obfuscate \
@@ -61,12 +52,7 @@ workflows:
           failure: true
 
       app_store_connect:
-        auth: integration
+        key_id: $APP_STORE_CONNECT_KEY_ID
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        private_key: $APP_STORE_CONNECT_PRIVATE_KEY
         submit_to_testflight: true
-
-# ============================================================
-# Notes:
-# - Bundle ID: com.zerinexpress.app
-# - Go to Codemagic UI → App settings → Code signing → Connect Apple Developer account (Recommended)
-# - Go to App settings → Publishing → Apple App Store Connect → Upload your .p8 file
-# ============================================================
