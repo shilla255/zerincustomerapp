@@ -44,7 +44,6 @@ class LocationSearchDialog extends StatelessWidget {
                );
              },
 
-             hideWithKeyboard: true,
              suggestionsCallback: (pattern) async {
               return await Get.find<LocationController>().searchLocation(context, pattern, fromMap: true);
             },

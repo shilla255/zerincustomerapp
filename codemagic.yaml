@@ -1,0 +1,98 @@
+# Codemagic CI/CD for Flutter iOS
+# Place this in the root of your project.
+# Configure in Codemagic UI: 
+# - Connect your Apple Developer account (for automatic code signing) or upload certificate + provisioning profile.
+# - Add App Store Connect API key (p8 file) under "Publish to App Store Connect".
+# - Set environment variables for publishing if not using UI integration:
+#   APP_STORE_CONNECT_KEY_ID
+#   APP_STORE_CONNECT_ISSUER_ID  
+#   APP_STORE_CONNECT_PRIVATE_KEY  (base64 of the .p8 or use file)
+
+workflows:
+  ios-release:
+    name: iOS Release Build (TestFlight / App Store)
+    max_build_duration: 60
+    instance_type: mac_mini_m2  # or mac_mini_m1, etc.
+
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        BUNDLE_ID: "com.zerinexpress.app"
+        # Add your team ID if needed for manual signing
+        # APPLE_DEVELOPER_TEAM_ID: "7WSYLQ8Y87"
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+        - pattern: 'release/*'
+          include: true
+
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.pub-cache
+        - ios/Pods
+
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: Install CocoaPods
+        script: |
+          cd ios
+          pod install
+
+      - name: Build IPA
+        script: |
+          flutter build ipa --release \
+            --obfuscate \
+            --split-debug-info=build/ios/debug-info
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/debug-info/**/*
+
+    publishing:
+      email:
+        recipients:
+          - $EMAIL_RECIPIENT
+        notify:
+          success: true
+          failure: true
+
+      # Publishing to App Store Connect / TestFlight
+      # Configure the API key in Codemagic UI under App settings > Publish > Apple App Store Connect
+      # or provide these env vars (recommended to store as encrypted variables or use file upload for the .p8)
+      app_store_connect:
+        key_id: $APP_STORE_CONNECT_KEY_ID
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        private_key: $APP_STORE_CONNECT_PRIVATE_KEY   # or path to .p8 if uploaded
+
+        # Send to TestFlight
+        submit_to_testflight: true
+
+        # Optionally add to beta groups (create them first in App Store Connect)
+        # beta_groups:
+        #   - "Internal Testers"
+
+# Notes for this project (Zerin Express / ride sharing user app):
+# - Bundle ID: com.zerinexpress.app (must match your App ID in Apple Developer portal)
+# - In Apple Developer: Create App ID with Push Notifications capability enabled.
+#   If using Sign in with Apple (RunnerProfile.entitlements), enable that too.
+# - Create the app record in App Store Connect with the exact same bundle ID.
+# - For signing on Codemagic:
+#   Recommended: Go to App settings > Code signing > "Automatic" and connect your Apple Developer account.
+#   Alternative: Manual - upload Distribution certificate (.p12) and matching provisioning profile.
+# - The project uses Automatic signing with team 7WSYLQ8Y87. Codemagic's integration will handle it if connected to the same team.
+# - GoogleService-Info.plist is correctly set for this bundle ID.
+# - After first successful build, promote in TestFlight or submit for review.
+# - If you get signing errors, double-check that the App ID in the portal has the required capabilities (Push Notifications).
+# - To test locally on a Mac: flutter build ipa --release
+
+# If you prefer full UI configuration instead of this yaml, you can delete this file and set everything in the Codemagic visual editor.

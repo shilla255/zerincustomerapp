@@ -1,0 +1,51 @@
+# Flutter Analyze Errors List
+
+**Project Path:** D:\A.projects\zerincustomerapp  
+**Date captured:** $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")  
+**Command context:** flutter analyze (as reported by user)
+
+## Errors (22 total as reported)
+
+error: The method 'PinCodeTextField' isn't defined for the type 'VerificationScreenState'. (undefined_method at [ride_sharing_user_app] lib\features\auth\screens\verification_screen.dart:115)
+error: Undefined name 'AnimationType'. (undefined_identifier at [ride_sharing_user_app] lib\features\auth\screens\verification_screen.dart:122)
+error: The method 'PinTheme' isn't defined for the type 'VerificationScreenState'. (undefined_method at [ride_sharing_user_app] lib\features\auth\screens\verification_screen.dart:124)
+error: Undefined name 'PinCodeFieldShape'. (undefined_identifier at [ride_sharing_user_app] lib\features\auth\screens\verification_screen.dart:125)
+error: Undefined name 'ErrorAnimationType'. (undefined_identifier at [ride_sharing_user_app] lib\features\auth\screens\verification_screen.dart:169)
+error: The named parameter 'hideWithKeyboard' isn't defined. (undefined_named_parameter at [ride_sharing_user_app] lib\features\location\widget\location_search_dialog.dart:47)
+error: The getter 'platform' isn't defined for the type 'FilePicker'. (undefined_getter at [ride_sharing_user_app] lib\features\message\controllers\message_controller.dart:108)
+error: Too many positional arguments: 0 expected, but 1 found. (extra_positional_arguments_could_be_named at [ride_sharing_user_app] lib\helper\notification_helper.dart:41)
+error: The named parameter 'settings' is required, but there's no corresponding argument. (missing_required_argument at [ride_sharing_user_app] lib\helper\notification_helper.dart:41)
+error: The named parameter 'settings' is required, but there's no corresponding argument. (missing_required_argument at [ride_sharing_user_app] lib\helper\notification_helper.dart:50)
+error: Too many positional arguments: 0 expected, but 1 found. (extra_positional_arguments_could_be_named at [ride_sharing_user_app] lib\helper\notification_helper.dart:51)
+error: The named parameter 'id' is required, but there's no corresponding argument. (missing_required_argument at [ride_sharing_user_app] lib\helper\notification_helper.dart:342)
+error: Too many positional arguments: 0 expected, but 4 found. (extra_positional_arguments_could_be_named at [ride_sharing_user_app] lib\helper\notification_helper.dart:343)
+error: Too many positional arguments: 0 expected, but 4 found. (extra_positional_arguments_could_be_named at [ride_sharing_user_app] lib\helper\notification_helper.dart:404)
+error: The named parameter 'id' is required, but there's no corresponding argument. (missing_required_argument at [ride_sharing_user_app] lib\helper\notification_helper.dart:404)
+error: The function 'CupertinoPageTransitionsBuilder' isn't defined. (undefined_function at [ride_sharing_user_app] lib\theme\light_theme.dart:61)
+error: Invalid constant value. (invalid_constant at [ride_sharing_user_app] lib\theme\light_theme.dart:61)
+error: The values in a const map literal must be constant. (non_constant_map_value at [ride_sharing_user_app] lib\theme\light_theme.dart:61)
+error: The function 'CupertinoPageTransitionsBuilder' isn't defined. (undefined_function at [ride_sharing_user_app] lib\theme\light_theme.dart:64)
+error: The values in a const map literal must be constant. (non_constant_map_value at [ride_sharing_user_app] lib\theme\light_theme.dart:64)
+
+## Warnings (as reported in the same output)
+
+warning: The member 'currentStatus' can only be used within instance members of subclasses of 'Channel'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\features\message\controllers\message_controller.dart:261)
+warning: Unused import: 'package:ride_sharing_user_app/util/app_constants.dart'. (unused_import at [ride_sharing_user_app] lib\features\refund_request\controllers\refund_request_controller.dart:14)
+warning: The member 'channelsManager' can only be used within instance members of subclasses of 'PusherChannelsClient'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:37)
+warning: The member 'channelsConnectionDelegate' can only be used within instance members of subclasses of 'ChannelsManager'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:37)
+warning: The member 'currentStatus' can only be used within instance members of subclasses of 'Channel'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:69)
+warning: The member 'currentStatus' can only be used within instance members of subclasses of 'Channel'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:103)
+warning: The member 'currentStatus' can only be used within instance members of subclasses of 'Channel'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:153)
+warning: The member 'currentStatus' can only be used within instance members of subclasses of 'Channel'. (invalid_use_of_protected_member at [ride_sharing_user_app] lib\helper\pusher_helper.dart:175)
+
+## Notes
+- Total issues reported by user in this session: 20 errors + 8 warnings (user mentioned "22 errors" in context).
+- These were surfaced by running `flutter analyze` in the project.
+- The project appears to be "ride_sharing_user_app" / Zerin customer app (Flutter).
+- Some issues are likely due to outdated package usage (pin_code_fields, flutter_local_notifications, file_picker, typeahead, theme builders) after Flutter/Dart/package upgrades.
+- File created at: D:\A.projects\zerincustomerapp\flutter_analyze_errors.txt
+- This file was generated as requested to document the exact errors visible.
+
+## Next steps (if needed)
+- The fixes for many of these (replacing PinCodeTextField usage, updating notification calls to named params, removing unsupported params, fixing theme consts, aliasing FilePicker) were previously applied in the workspace.
+- Recommend running `flutter pub get` + `flutter clean` + `flutter analyze` again locally to confirm current status after any edits.

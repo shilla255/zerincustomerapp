@@ -11,7 +11,6 @@ import 'package:ride_sharing_user_app/features/ride/controllers/ride_controller.
 import 'package:ride_sharing_user_app/features/splash/controllers/config_controller.dart';
 import 'package:ride_sharing_user_app/helper/display_helper.dart';
 import 'package:ride_sharing_user_app/helper/file_validation_helper.dart';
-import 'package:ride_sharing_user_app/util/app_constants.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class RefundRequestController extends GetxController implements GetxService {

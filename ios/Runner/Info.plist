@@ -33,26 +33,22 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSCameraUsageDescription</key>
-    <string>This app need camera access for taking photo for user profile picture.</string>
-    <key>NSPrivacyAccessedAPITypes</key>
-    <string>This app need location permission for tracking driver start to destination trip.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to location for pick location for creating a ride request, Then driver can pickup you.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-        <string>This app needs access to location for pick location for creating a ride request, Then driver can pickup you</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app need photo gallery access for taking photo for user profile picture.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Need microphone access for uploading photos</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Permission required to record audio for speech recognition</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Permission required to record audio for speech recognition</string>
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>fetch</string>
-        <string>remote-notification</string>
-    </array>
+	<string>This app needs camera access for taking photos for user profile pictures.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location for picking locations when creating a ride request.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs access to location for picking locations when creating a ride request.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo gallery access for selecting photos for user profile pictures.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs microphone access for speech recognition features.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app needs permission for speech recognition.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -68,29 +64,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-		<key>CFBundleURLTypes</key>
-           <array>
-               <dict>
-                   <key>CFBundleURLName</key>
-                   <string>com.sixamtech.hexarideuser</string>
-                   <key>CFBundleURLSchemes</key>
-                   <array>
-                       <string>drivemond</string>
-                   </array>
-               </dict>
-           </array>
-
-    <key>CFBundleURLTypes</key>
-        	<array>
-        		<dict>
-        			<key>CFBundleTypeRole</key>
-        			<string>Editor</string>
-        			<key>CFBundleURLSchemes</key>
-        			<array>
-        				<string>com.googleusercontent.apps.76471554747-3p9dhm14lm8ka1qruonucnaduk5rpsf7</string>
-        			</array>
-        		</dict>
-        	</array>
-
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.76471554747-3p9dhm14lm8ka1qruonucnaduk5rpsf7</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

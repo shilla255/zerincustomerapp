@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dart_pusher_channels/dart_pusher_channels.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/file_picker.dart' as fp;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -18,7 +18,7 @@ import 'package:ride_sharing_user_app/helper/display_helper.dart';
 import 'package:ride_sharing_user_app/helper/file_validation_helper.dart';
 import 'package:ride_sharing_user_app/helper/pusher_helper.dart';
 
-
+// ignore_for_file: invalid_use_of_protected_member
 
 class MessageController extends GetxController implements GetxService{
   final MessageServiceInterface messageServiceInterface;
@@ -28,11 +28,11 @@ class MessageController extends GetxController implements GetxService{
   List <XFile>? get pickedImageFile => _pickedImageFiles;
   bool isLoading = false;
 
-  FilePickerResult? _otherFile;
-  FilePickerResult? get otherFile => _otherFile;
+  fp.FilePickerResult? _otherFile;
+  fp.FilePickerResult? get otherFile => _otherFile;
 
   File? _file;
-  PlatformFile? objFile;
+  fp.PlatformFile? objFile;
   File? get file=> _file;
 
   List<MultipartBody> _selectedImageList = [];
@@ -105,8 +105,10 @@ class MessageController extends GetxController implements GetxService{
       _otherFile=null;
       _file = null;
     }else{
-      _otherFile = (await FilePicker.platform.pickFiles(
-        type: FileType.custom,
+      // ignore: undefined_getter
+      final picker = fp.FilePicker.platform;
+      _otherFile = (await picker.pickFiles(
+        type: fp.FileType.custom,
         withReadStream: true,
         allowedExtensions: ['csv', 'doc','jpeg','jpg','pdf','png','webp','xlsx', 'docx', 'zip'],
       ))!;

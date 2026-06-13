@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:dart_pusher_channels/dart_pusher_channels.dart';
 import 'package:get/get.dart';
+
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:ride_sharing_user_app/features/auth/controllers/auth_controller.dart';
 import 'package:ride_sharing_user_app/features/dashboard/screens/dashboard_screen.dart';
 import 'package:ride_sharing_user_app/features/map/controllers/map_controller.dart';

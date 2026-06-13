@@ -38,25 +38,15 @@ class NotificationHelper {
     var androidInitialize = const AndroidInitializationSettings('notification_icon');
     var iOSInitialize = const DarwinInitializationSettings();
     var initializationsSettings = InitializationSettings(android: androidInitialize, iOS: iOSInitialize);
-    flutterLocalNotificationsPlugin.initialize(initializationsSettings, onDidReceiveNotificationResponse: (NotificationResponse payload) async {
-      return;
-    },
-    onDidReceiveBackgroundNotificationResponse: myBackgroundMessageReceiver);
+    flutterLocalNotificationsPlugin.initialize(
+      settings: initializationsSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse payload) async {
+        return;
+      },
+      onDidReceiveBackgroundNotificationResponse: myBackgroundMessageReceiver,
+    );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      AndroidInitializationSettings androidInitialize = const AndroidInitializationSettings('notification_icon');
-      var iOSInitialize = const DarwinInitializationSettings();
-      var initializationsSettings = InitializationSettings(android: androidInitialize, iOS: iOSInitialize);
-      flutterLocalNotificationsPlugin.initialize(
-        initializationsSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse response) async {
-          notificationRouteCheck(message.data);
-          return;
-        },
-
-        onDidReceiveBackgroundNotificationResponse: myBackgroundMessageReceiver,
-      );
-
       ///Debug print
       customPrint('onMessage: ${message.data}');
 
@@ -339,12 +329,12 @@ class NotificationHelper {
       color: const Color(0xFF00A08D),
     );
     var platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
-    flutterLocalNotificationsPlugin.show(
-        0,
-        'Faster pick-ups, safer trips',
-        body ?? 'When your\'re riding with ${AppConstants.appName}, your location is being collected for faster pick-ups and safety features. Manage permissions in your device\'s settings',
-        platformChannelSpecifics,
-        payload: 'item x'
+    await flutterLocalNotificationsPlugin.show(
+      id: 0,
+      title: 'Faster pick-ups, safer trips',
+      body: body ?? 'When your\'re riding with ${AppConstants.appName}, your location is being collected for faster pick-ups and safety features. Manage permissions in your device\'s settings',
+      notificationDetails: platformChannelSpecifics,
+      payload: 'item x',
     );
   }
 
@@ -401,7 +391,13 @@ class NotificationHelper {
       sound: const RawResourceAndroidNotificationSound('notification'),
     );
     final NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
-    await fln.show(0, title, body, platformChannelSpecifics, payload: orderID);
+    await fln.show(
+      id: 0,
+      title: title,
+      body: body,
+      notificationDetails: platformChannelSpecifics,
+      payload: orderID,
+    );
   }
 
   static Future<String> _downloadAndSaveFile(String url, String fileName) async {
