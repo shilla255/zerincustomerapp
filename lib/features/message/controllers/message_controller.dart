@@ -105,9 +105,7 @@ class MessageController extends GetxController implements GetxService{
       _otherFile=null;
       _file = null;
     }else{
-      // ignore: undefined_getter
-      final picker = fp.FilePicker.platform;
-      _otherFile = (await picker.pickFiles(
+      _otherFile = (await fp.FilePicker.pickFiles(
         type: fp.FileType.custom,
         withReadStream: true,
         allowedExtensions: ['csv', 'doc','jpeg','jpg','pdf','png','webp','xlsx', 'docx', 'zip'],
