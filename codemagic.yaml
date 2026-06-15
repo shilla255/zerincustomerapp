@@ -40,8 +40,7 @@ workflows:
 
       - name: Get Flutter packages
         script: |
-          flutter clean
-          flutter packages pub get
+          flutter pub get
 
       - name: Install CocoaPods
         script: |
