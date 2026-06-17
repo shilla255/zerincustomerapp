@@ -36,9 +36,9 @@ workflows:
           app-store-connect fetch-signing-files "$BUNDLE_ID" \
             --type IOS_APP_STORE \
             --create \
-            --team-id $APPLE_TEAM_ID
+            --team-id "$APPLE_TEAM_ID"
           keychain add-certificates
-          xcode-project use-profiles --profile "zerin"
+          xcode-project use-profiles
 
       - name: Get Flutter packages
         script: |
