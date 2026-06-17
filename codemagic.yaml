@@ -10,6 +10,11 @@ workflows:
       cocoapods: default
       groups:
         - app-store-connect
+      ios_signing:
+        provisioning_profiles:
+          - zxerin          # <-- exact reference name from your screenshot
+        certificates:
+          - zerin_final      # <-- exact reference name from your screenshot
       vars:
         BUNDLE_ID: "com.zerinexpress.app"
         APP_STORE_CONNECT_KEY_IDENTIFIER: "MU4XXV322L"
@@ -32,12 +37,6 @@ workflows:
     scripts:
       - name: Set up code signing
         script: |
-          keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create \
-            --team-id "$APPLE_TEAM_ID"
-          keychain add-certificates
           xcode-project use-profiles
 
       - name: Get Flutter packages
